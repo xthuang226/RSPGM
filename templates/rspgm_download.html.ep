@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="jumbotron"><h1 id="result_title">Download</h1></div>
+
+<div id="grid">
+	<p>
+	All source codes and input files can be downloaded <a href="/download/all"><i>here</i></a>. A demo, <i><b>demo.m</b></i>, is shown how to run the program.
+	<br>
+	PPIs network with RSPGM scores file is available <a href="/download/PPIs_csv"><i>here</i></a>, in tab-delimited format, or <a href="/download/PPIs_tab"><i>here</i></a>, in comma-delimited format.
+	<br>
+	Also, it can be viewed in a <a href="/download/PPIs_view" target="_blank"><i>new page</i></a>.
+	<br>
+	Interaction path inference result of the canonical Wnt/&beta;-catenin pathway example is available <a href="/download/pathway_csv"><i>here</i></a>.
+	</p>
+</div>
+
+ <hr>
+ <footer>
+       <p>&copy;2015, RSPGM, All rights reserved. Design by <a href="mailto: xthuang3-c@my.cityu.edu.hk">Xiao-Tai Huang</a>.</p>
+ </footer>
+
+
+</body>
+</html>

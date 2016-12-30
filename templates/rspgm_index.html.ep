@@ -1,0 +1,158 @@
+Welcome to RSPGM website!
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>RSPGM Website</title>
+
+<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/lib/html5shiv.min.js"></script>
+      <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">RSPGM Website v1.1</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+		  <ul class="nav navbar-nav">
+			<li id="mhome" class="active"><a id="home" href="#">Home<span class="sr-only">(current)</span></a></li>
+			<li id="msearch"><a id="search" href="#">Search Result</a></li>
+			<li id="mdownload"><a id="download" href="#">Download</a></li>
+			<li id="mpathway"><a id="pathway" href="#">Interaction Path Inference Example</a></li>
+		  </ul>
+          <form class="navbar-form navbar-right" >
+            <div class="form-group">
+              <input type="text" id="gene_name" placeholder="Gene Name or ID" class="form-control" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <div class="container" id="main">
+    <div class="jumbotron"></div>
+    </div> <!-- /container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/lib/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="/lib/encoder.js"></script>
+    <script src="/lib/bootstrap-typeahead.js"></script>
+	
+    <script>
+      $(function () {
+		Encoder.EncodeType = "entity";
+		var names = JSON.parse(Encoder.htmlDecode('<%= $names %>'));
+
+		$("#gene_name").typeahead({
+		    source: names,
+	            itemSelected: function(){$("form button").click();}
+		});
+      });
+
+    $( document ).ready(function() {
+		$("#main").load("load/rspgm_home.html.ep");
+
+		$(" .navbar-header a ").click(function() {
+		  $("ul li").removeAttr("class");
+		  $("#mhome").attr({class:"active"});
+		  event.preventDefault();
+		  $("#main").load("load/rspgm_home.html.ep");
+		});
+
+		$(" #home ").click(function() {
+		  $("ul li").removeAttr("class");
+		  $("#mhome").attr({class:"active"});
+		  event.preventDefault();
+		  $("#main").load("load/rspgm_home.html.ep");
+		});
+
+		$(" #download ").click(function() {
+		  $("ul li").removeAttr("class");
+		  $("#mdownload").attr({class:"active"});
+		  $.ajax({
+			url: "/download",
+			success: function( result ){
+				Encoder.EncodeType = "entity";
+				var page = Encoder.htmlDecode( result ); 
+
+				$("#main").html( page );
+
+			},
+			error: function(xhr){
+				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		  });
+		});
+		
+		$(" #pathway ").click(function() {
+		  $("ul li").removeAttr("class");
+		  $("#mpathway").attr({class:"active"});
+		  $.ajax({
+			url: "/pathway",
+			success: function( result ){
+				Encoder.EncodeType = "entity";
+				var page = Encoder.htmlDecode( result ); 
+
+				$("#main").html( page );
+
+			},
+			error: function(xhr){
+				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		  });
+		});
+		
+
+		$( "form" ).submit(function( event ) {
+		  $("ul li").removeAttr("class");
+		  $("#msearch").attr({class:"active"});
+		  event.preventDefault();
+
+		  var geneValue = $( "#gene_name" ).val();
+
+		  $.ajax({
+			url: "/search",
+			data: {gene_name: geneValue},
+			success: function( result ){
+				Encoder.EncodeType = "entity";
+				var page = Encoder.htmlDecode( result ); 
+
+				$("#main").html( page );
+
+			},
+			error: function(xhr){
+				alert("An error occured: " + xhr.status + " " + xhr.statusText);
+			}
+		  });
+		});
+
+	});
+ 
+    </script>
+  </body>
+</html>

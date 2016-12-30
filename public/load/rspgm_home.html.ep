@@ -1,0 +1,34 @@
+<div class="jumbotron">
+<p id="title"><b>Integrative <i>C. elegans</i> Protein-Protein Interaction Network with Reliability Assessment Based on A Probabilistic Graphical Model</b></p>
+<p id="author">Xiao-Tai Huang, Yuan Zhu, Leanne Lai Hang Chan, Zhongying Zhao and Hong Yan</p>
+<br>
+<br>
+
+<p>
+
+This is a website for querying and visualizing <u><b>P</b></u>rotein-<u><b>P</b></u>rotein <u><b>I</b></u>nteraction (<b>PPI</b>) network with reliable assessemnt from <u><b>R</b></u>eliability <u><b>S</b></u>core based on <u><b>P</b></u>robability <u><b>G</b></u>raphical <u><b>M</b></u>odel (<b>RSPGM</b>) in <i>Caenorhabditis elegans</i> (worm).
+<br>
+<br>
+RSPGM is a novel proposed PPI assessemnt method based on network topology and state-of-the-art probabilistic graphical model. It can be applied on any PPI network for the purpose of weighting interactions. The source code of RSPGM can be downloaded in the '<b>Download</b>' page. As an example for application, we use this method to score our constructed integrative PPI network in <i>C. elegans</i>. Data of the whole network with RSPGM scores also can be downloaded in the '<b>Download</b>' page.
+<br>
+<br>
+Fast query and visualization of interested genes in the integrative <i>C. elegans</i> PPI network is avaliable:
+<br>
+<br>
+<spin class="qmethod"><b>Single Gene Query</b></spin>: type one gene's <u><i>Symbol Name</i></u>, <u><i>Locus Name</i></u>, <u><i>Gene ID</i></u>, or <u><i>WormBase ID</i></u> in the search bar, for example '<spin class="qexample"><i>pop-1</i></spin>', '<spin class="qexample">W10C8.2</spin>', '<spin class="qexample">171849</spin>', or '<spin class="qexample">WBGene00004077</spin>'. The '<b>Search Result</b>' page shows the visualized network graph containing the queried gene (with dark blue color) and its neighbors. When clicking on the edge, RSPGM score is shown in the floating tab. The information about involved genes and PPIs of the result network is shown in the bottom of the '<b>Search Result</b>' page.
+<br>
+<br>
+<spin class="qmethod"><b>Multiple Genes Query</b></spin>: type multiple genes' names or IDs (<u><i>Symbol Name</i></u>, <u><i>Locus Name</i></u>, <u><i>Gene ID</i></u>, or <u><i>WormBase ID</i></u>) separating by <b>comma</b> in any order in the search bar, for example '<spin class="qexample">F27E11.3, gsk-3, 173287, K02B12.4, WBGene00000156, mig-5, WBGene00001101, 266854</spin>'. It will return a network graph in the '<b>Search Result</b>' page, including all queried genes and their interactions with scores.
+
+<br>
+<br>
+
+To evaluate availability of RSPGM, the scored integrative PPI network in <i>C. elegans</i> is applied on infering interaction path of specific pathway. An example is shown in the '<b>Interaction Path Inference Example</b>' page, consistent with the example in our paper (Huang <i>et al.</i>, 2015).
+
+</p>
+ </div>
+ <hr>
+ <footer>
+       <p>&copy;2015, RSPGM, All rights reserved. Design by <a href="mailto: xthuang3-c@my.cityu.edu.hk">Xiao-Tai Huang</a>.</p>
+ </footer>
+

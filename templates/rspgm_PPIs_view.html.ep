@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+<style type="text/css">
+
+table {
+	margin:auto;
+	border-collapse:collapse;
+}
+
+td {
+	text-align:left;
+	font-size:15px;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.withborder {
+	border-right: 1px groove #CCCCCC;
+	border-width:2px;
+}
+
+th {
+	padding-left:5px;
+	padding-right:5px;
+	font-size:20px;
+	text-align:left;
+	border-bottom: 1px groove #CCCCCC;
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+<table width="80%">
+	<tbody>
+	</tr>
+	% my $i = 1;
+	% foreach my $row (@$viewppis) {
+		<tr>
+		% if ($i == 1){
+			% my $j = 1;
+			% foreach my $text (@$row) {
+				% if ($j != 1 and $j != 2 and $j != 3 and $j != 5 and $j != 6 and $j != 7 and $j != 18){
+					<th class="withborder"><b><%= $text %></b></th>
+				% }else{
+					<th><b><%= $text %></b></th>
+				% }
+				% $j++;
+			% }
+		% }else{
+			% my $j = 1;
+			% foreach my $text (@$row) {
+				% if ($j != 1 and $j != 2 and $j != 3 and $j != 5 and $j != 6 and $j != 7 and $j != 18){
+					<td class="withborder"><%= $text %></td>
+				% }else{
+					<td><%= $text %></td>
+				% }
+				% $j++;
+			% }
+		% }
+		</tr>
+		% $i++;
+	% }
+	% $i = 1;
+	</tbody>
+</table>
+
+
+</body>
+</html>
+
+
+
+

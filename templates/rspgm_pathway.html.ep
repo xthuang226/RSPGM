@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="jumbotron"><h1 id="result_title">Interaction Path Inference Example</h1></div>
+
+<div id="grid">
+	<p>
+	This graph shows the result of infering interaction path of the canonical Wnt/&beta;-catenin pathway, an interaction path between <i>egl-20</i> (Wnt ligand) and <i>sys-1</i> (&beta;-catenin), based on RSPGM scored integrative PPI network in <i>C. elegans</i>. The inferred interaction path, with highest path score, includes 8 genes. 6 out of them, in orange color, have been validated to be Wnt pathway components by literature study. The other 2 genes, in grey color, are not Wnt pathway components, but are highly related with Wnt pathway. The deatails are demonstrated in our paper (Huang <i>et al.</i>, 2015).
+	</p>
+	<br>
+	<iframe src="/pathway_graph" height="20%" width="100%" allowfullscreen="" frameborder="0"></iframe>
+</div>
+	
+	
+ <hr>
+ <footer>
+       <p>&copy;2015, RSPGM, All rights reserved. Design by <a href="mailto: xthuang3-c@my.cityu.edu.hk">Xiao-Tai Huang</a>.</p>
+ </footer>
+
+</body>
+</html>

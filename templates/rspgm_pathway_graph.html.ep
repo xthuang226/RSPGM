@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="/css/jquery.qtip.min.css" rel="stylesheet">
+   <link href="/css/style.css" rel="stylesheet">
+   <meta charset="utf-8">
+   <title>Draw Network</title>
+   <script src="/lib/jquery.min.js"></script>
+   <script src="/lib/jquery.qtip.min.js"></script>
+   <script src="/lib/cytoscape.min.js"></script>
+   <script src="/lib/encoder.js"></script>
+   <script src="/lib/cytoscape-qtip.js"></script>
+</head>
+
+<body>
+<div class="jumbotron"><h1 id="result_title">Pathway page</h1></div>
+   <div id="cy"></div>
+
+   %= javascript begin
+
+	$(function(){ // on dom ready
+
+	    Encoder.EncodeType = "entity";
+
+	    var nodes = JSON.parse('[{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"egl-20"},"position":{"x":100,"y":100}},{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"cam-1"},"position":{"x":200,"y":100}},{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"dsh-1"},"position":{"x":300,"y":100}},{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"mig-5"},"position":{"x":400,"y":100}},{"css":{"width":40,"background-color":"#B6B6B6","height":40},"data":{"id":"lin-36"},"position":{"x":500,"y":100}},{"css":{"width":40,"background-color":"#B6B6B6","height":40},"data":{"id":"ztf-2"},"position":{"x":600,"y":100}},{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"pop-1"},"position":{"x":700,"y":100}},{"css":{"width":40,"background-color":"#FF9933","height":40},"data":{"id":"sys-1"},"position":{"x":800,"y":100}}]');
+	    var edges = JSON.parse('[{"css":{"opacity":0.5,"width":4,"line-color":"#FFBDBD"},"data":{"source":"cam-1","target":"dsh-1","weight":0.035334533,"id":"cam-1dsh-1"}},{"css":{"opacity":0.5,"width":4,"line-color":"#FFBDBD"},"data":{"source":"cam-1","target":"egl-20","weight":0.001773827,"id":"cam-1egl-20"}},{"css":{"opacity":3.5,"width":10,"line-color":"#FF8181"},"data":{"source":"dsh-1","target":"mig-5","weight":0.69208746,"id":"dsh-1mig-5"}},{"css":{"opacity":5.5,"width":14,"line-color":"#FF5959"},"data":{"source":"ztf-2","target":"lin-36","weight":1,"id":"ztf-2lin-36"}},{"css":{"opacity":5.5,"width":14,"line-color":"#FF5959"},"data":{"source":"ztf-2","target":"pop-1","weight":1,"id":"ztf-2pop-1"}},{"css":{"opacity":4,"width":11,"line-color":"#FF7777"},"data":{"source":"lin-36","target":"mig-5","weight":0.74077445,"id":"lin-36mig-5"}},{"css":{"opacity":0.5,"width":4,"line-color":"#FFBDBD"},"data":{"source":"sys-1","target":"pop-1","weight":2.54e-005,"id":"sys-1pop-1"}}]');
+
+	    var cy = cytoscape({
+		  container: document.getElementById('cy'),
+		  wheelSensitivity: 0.2,
+
+		  style: cytoscape.stylesheet()
+			  .selector('node')
+				  .css({
+					  'content': 'data(id)',
+				  })
+			  .selector(':selected')
+				  .css({
+					  'background-color': 'black',
+					  'line-color': 'black',
+					  'target-arrow-color': 'black',
+					  'source-arrow-color': 'black',
+					  'opacity': 1
+				  }),
+
+		  layout:{
+			  name:'preset',
+			  padding:30
+		  }
+	    });
+
+	    cy.load({"nodes": nodes, "edges": edges});
+
+	    cy.$('edge').qtip({
+		  content: {
+			  text: function(){ 
+			     var result = 'not found!';
+			     for(var i=0; i<edges.length; i++) {
+			       if (edges[i].data.source.concat(edges[i].data.target) == this.id()) {
+				 result = edges[i].data.weight;
+				 break;
+			       }
+			     }
+			     
+			     return result; 
+			  }
+		  },
+		  style: {
+			  classes: 'qtip-tipsy',
+			  tip: {
+			    width: 16,
+			    height: 8
+			  }
+		  }
+	    });
+		
+		cy.userZoomingEnabled( false );
+
+      }); // on dom ready
+
+   %= end
+</body>
+</html>

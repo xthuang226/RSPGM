@@ -1,0 +1,95 @@
+% my $nodes_n = scalar @$nodes;
+% my $rows_n = scalar @$rows;
+
+
+<div class="jumbotron">
+<h1 id="result_title">Search Result</h1>
+</div>
+
+% if ($nodes_n > 0) {
+
+
+<div id="grid">
+	<p>This graph contains <i><%= $nodes_n %></i> nodes and <i><%= $rows_n %></i> PPIs.</p>
+	<iframe src="/graph" height="60%" width="100%" allowfullscreen="" frameborder="0"></iframe>
+	<a href="/graph" target="_blank">Show graph in new page</a>
+	<hr>
+	<p>
+	Involved genes information:
+	<br>
+	</p>
+	
+	<table width="100%">
+		<col style="width:18%">
+		<col style="width:18%">
+		<col style="width:18%">
+		<thead>
+		<tr>
+		<th>Locus</th>
+		<th>Symbol</th>
+		<th>Gene ID</th>
+		<th>Wormbase ID</th>
+		</thead>
+		</tr>
+		<tbody>
+		% foreach my $row (@$name_total) {
+			<tr>
+			% foreach my $text (@$row) {
+				% if ($text =~ /^WB/){
+					<td><a href="http://www.wormbase.org/species/c_elegans/gene/<%= $text %>" target="_blank"><%= $text %></a></td>
+				% }elsif ($text =~ /^\d+$/){
+					<td><a href="http://www.ncbi.nlm.nih.gov/gene/?term=<%= $text %>" target="_blank"><%= $text %></a></td>
+				% }else{
+					<td><%= $text %></td>
+				% }
+			% }
+			</tr>
+		% }
+		</tbody>
+	</table>
+	
+	% if ($rows_n > 0) {
+	<hr>
+	<p>
+	PPIs information:
+	<br>
+	</p>
+	<table width="100%">
+		<col style="width:18%">
+		<col style="width:18%">
+		<col style="width:18%">
+		<thead>
+		<tr>
+		<th>Name_A</th>
+		<th>Name_B</th>
+		<th>RSPGM_score</th>
+		<th>Pubmed_ID</th>
+		</thead>
+		<tbody>
+		</tr>
+		% foreach my $row (@$rows) {
+			<tr>
+			% foreach my $text (@$row) {
+				<td><%= $text %></td>
+			% }
+			</tr>
+		% }
+		</tbody>
+	</table>
+	% }
+</div>
+
+% }else{
+<div id="grid">
+	<p>No result. Please try to refine your search keyword!</p>
+</div>
+% }
+
+
+ <hr>
+ <footer>
+       <p>&copy;2015, RSPGM, All rights reserved. Design by <a href="mailto: xthuang3-c@my.cityu.edu.hk">Xiao-Tai Huang</a>.</p>
+ </footer>
+
+
+
